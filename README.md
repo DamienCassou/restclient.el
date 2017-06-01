@@ -141,7 +141,20 @@ Restclient now allows to specify file path to use as a body, like this:
     Content-type: text/plain
 
     < /etc/passwd
+
+# Basic authentication
+
+Restclient supports basic authentication, like this:
+
+    :username := (setq username "myusername")
+    :password := (setq password "randompassword")
+    :authorization := (format "Basic %s" (base64-encode-string (format "%s:%s" username password)))
     
+    # Get information about a user
+    GET http://localhost:4000/users/foo
+    Authorization: :authorization
+
+
 ### Caveats:
 
 - Multiline variables can be used in headers or body. In URL too, but it doesn't make sense unless it was long elisp expression evaluating to simple value.
